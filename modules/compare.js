@@ -62,12 +62,17 @@ console.log(user);
             var newEntries = [];
             _.each(source, function(entry, key) {
                 if (!target[key]) {
-                    console.log(entry.sys_class_name, entry.sys_name); 
-                    newEntries.push(entry); 
+                    console.log('NEW',entry.sys_class_name, entry.sys_name , ' (' + key + ')');
+                    newEntries.push(entry);
+                } else {
+                    if (entry.sys_updated_on !== target[key].sys_updated_on) {
+                        console.log('CHANGED',entry.sys_class_name, entry.sys_name , ' (' + key + ')');
+                        newEntries.push(entry);
+                    }
                 }
             });
 
-            console.log(`New entries ${newEntries.length}`);
+            console.log(`New/Changed entries ${newEntries.length}`);
         }
     );
 }
