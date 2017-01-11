@@ -1,22 +1,31 @@
 var program = require('commander');
-var compare = require('./modules/compare');
-var list = require('./modules/list');
+var commands = require('./commands');
 
 program
   .version('0.0.1')
-  .option('-H, --host <host>', 'ServiceNow host (i.e. dev0000.servicenow.com)')
-  .option('-u, --user <user>', 'user name')
-  .option('-p, --pass <pass>', 'password');
+  .option('--host <host>', 'ServiceNow instance (i.e. dev0000.servicenow.com)')
+  .option('--user <user>', 'user name')
+  .option('--password <password>', 'password')
+  .option('--output <output>', 'output format (json, csv)');
 
-program
-  .command('compare <host> <user> <pass>')
-  .description('Compare two ServiceNow instances')
-  .action(compare);
+program.parse(process.argv);
 
-program
-  .command('list <table>')
-  .description('Compare two ServiceNow instances')
-  .option('--top <top>', 'Return <top> records only. Default - 10')
-  .action(list);
+if (!program.host) {
+  console.log('\n error: missing required argument \'host\' \n');
+  process.exit(1);
+}
 
-  program.parse(process.argv);
+if (!program.user) {
+  console.log('\n error: missing required argument \'user\' \n');
+  process.exit(1);
+}
+
+if (!program.password) {
+  console.log('\n error: missing required argument \'password\' \n');
+  process.exit(1);
+}
+
+if (program.output && program.output !== 'json' && program.output !== 'csv') {
+  console.log('\n error: unkown output format \n');
+  process.exit(1);
+}

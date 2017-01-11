@@ -25,6 +25,7 @@
     "co": "^4.6.0",
     "co-prompt": "^1.0.0",
     "commander": "^2.9.0",
+    "csv": "^1.1.0",
     "lodash": "^4.17.2",
     "progress": "^1.1.8",
     "subcommander": "^0.1.3",
