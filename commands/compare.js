@@ -27,7 +27,6 @@ function compare(options) {
         process.exit(1);
     }
 
-console.log(options.targetPassword);
     var filter = `sys_scope.scope=${options.scope}^sys_class_name!=sys_metadata_delete^ORsys_class_name=NULL`;
 
     var sourceFiles;
